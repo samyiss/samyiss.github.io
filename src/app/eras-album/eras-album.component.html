@@ -1,26 +1,71 @@
 <div class="bg-midnights m-4 2xl:ml-14">
   <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-    <div class="grid gap-4" *ngFor="let gallery of listePictures;">
-      <div>
-        <img class="h-auto max-w-full rounded-lg"
+    <div class="grid gap-4" *ngFor="let gallery of listPictures; let i=index">
+      <div (click)="onPreviewImage(i)">
+        <img class="h-auto max-w-full rounded-lg cursor-pointer"
              [ngSrc]="gallery.picture_url"
              [alt]="gallery.description + gallery.picture_date + gallery.gallery_id"
              width="400" height="400"
+             priority="true"
         >
-<!--             (click)="toggleModal(gallery.picture_url)"-->
-
       </div>
     </div>
   </div>
+</div>
 
-<!--  <div *ngIf="showModal" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">-->
-<!--    <div class="relative">-->
-<!--      <img class="rounded-lg m-10 image"-->
-<!--           [ngSrc]="selectedImage"-->
-<!--           alt="image big gallery"-->
-<!--           width="865" height="865"-->
-<!--      >-->
-<!--    </div>-->
-<!--  </div>-->
+<div *ngIf="showMask" class="lightbox overflow-hidden">
+  <div *ngIf="showCount" class="count text-2xl textForm text-midnights w-full">{{currentIndex + 1}}/{{totalImageCount}}</div>
+  <button *ngIf="previewImage" class="close-btn" (click)="closePreview()">
+    <div class="flex object-bottom justify-center">
+      <button
+        type="button" data-te-ripple-init data-te-ripple-color="light"
+        class="scroll-button rounded-full bg-TPD p-2 font-medium text-black-50"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="20" height="20"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="black"
+             stroke-width="2.5"
+             stroke-linecap="round"
+             stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+    </div>
 
+  </button>
+  <button *ngIf="currentIndex < listPictures.length - 1" class="btn-lightbox-carousel btn-prev" (click)="next()">
+    <div class="flex object-bottom justify-center">
+      <button
+        type="button" data-te-ripple-init data-te-ripple-color="light"
+        class="scroll-button rounded-full bg-TPD p-3 font-medium text-white"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" transform="rotate(-90)">
+          <path fill="currentColor" d="M11 4h2v12l5.5-5.5l1.42 1.42L12 19.84l-7.92-7.92L5.5 10.5L11 16z"/>
+        </svg>
+      </button>
+    </div>
+  </button>
+  <button *ngIf="currentIndex > 0" class="btn-lightbox-carousel btn-next" (click)="previous()">
+    <div class="flex object-bottom justify-center">
+      <button
+        type="button" data-te-ripple-init data-te-ripple-color="light"
+        class="scroll-button rounded-full bg-TPD p-3 font-medium text-white"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" transform="rotate(90)">
+          <path fill="currentColor" d="M11 4h2v12l5.5-5.5l1.42 1.42L12 19.84l-7.92-7.92L5.5 10.5L11 16z"/>
+        </svg>
+      </button>
+    </div>
+  </button>
+
+  <div *ngIf="previewImage" class="lightbox-img">
+    <img class="h-auto max-w-full rounded-lg"
+         [ngSrc]="currentImage.picture_url"
+         [alt]="currentImage.description + currentImage.picture_date + currentImage.gallery_id"
+         width="400" height="400"
+    >
+  </div>
 </div>

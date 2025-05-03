@@ -68,4 +68,8 @@ export class ProjectsComponent {
   hasTag(tag: string, list: Tag[]): boolean {
     return list.find(({name}) => name.toLowerCase().includes(tag)) != null
   }
+
+  redirect(id: string): void {
+    return console.log(id)
+  }
 }

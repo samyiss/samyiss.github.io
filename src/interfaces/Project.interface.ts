@@ -5,6 +5,7 @@ import {Picture} from "./Picture.interface";
 export interface Project {
   project_id: number,
   name: string,
+  abbreviation: string,
   date_project: string,
   short_description: string,
   detailed_description: string,

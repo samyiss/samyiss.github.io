@@ -1,4 +1,7 @@
-<app-nav> </app-nav>
+<nav *ngIf="showNavbar">
+  <app-nav> </app-nav>
+</nav>
+
 <router-outlet></router-outlet>
 <!--<app-chatbot></app-chatbot>-->
 <app-footer></app-footer>

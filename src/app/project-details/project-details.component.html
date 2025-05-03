@@ -1,0 +1,11 @@
+<div class="bg-midnights lg:mr-4 lg:ml-4 2xl:m-0">
+  <div class="flex items-center justify-center md:ml-2 md:mr-4 ">
+    <div class="flex-col justify-center items-center">
+      <div class="txt w-full text-4xl 2xl:text-6xl text-text-font uppercase text-center mb-20 2xl:mb-32 sm:mb-4">{{ project.name }}</div>
+      <div class="textForm uppercase w-full text-2xl 2xl:text-4xl text-text-font text-center px-4 py-2">{{ project.date_project }}</div>
+    </div>
+    <div class="flex items-center justify-center">
+      <img [ngSrc]="project.pictures[0].picture" loading="eager" [width]="!project.name.toLowerCase().includes('book') ? 125 : 150" [height]="!project.name.toLowerCase().includes('book') ? 125 : 150" alt="Logo"/>
+    </div>
+  </div>
+</div>
